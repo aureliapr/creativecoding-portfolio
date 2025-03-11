@@ -320,7 +320,7 @@ function drawFeature2() {
     window.p5Iframe.style.left = '50%';
     window.p5Iframe.style.top = '45%'; // Move up slightly to make room for text
     window.p5Iframe.style.transform = 'translate(-50%, -50%)';
-    window.p5Iframe.style.marginTop = '0px'; // Adjust to ensure there's space below
+    window.p5Iframe.style.marginTop = '5px'; // Adjust to ensure there's space below
     
     // Add glowing border that matches portfolio text
     window.p5Iframe.style.border = '4px solid rgba(0, 200, 255, 0.8)';
@@ -352,7 +352,7 @@ function drawFeature2() {
           font-size: 16px;
           margin-bottom: 8px;
           color: rgb(180, 220, 255);
-        ">TRY DIFFERENT GESTURES: HEART SHAPE, FLAT HAND, VICTORY SIGN</p>
+        ">TRY DIFFERENT GESTURES: 🫳,HAND SLOPE, 🫶, 🤘</p>
         <p style="
           font-size: 16px;
           color: rgb(180, 220, 255);
