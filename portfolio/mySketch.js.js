@@ -250,34 +250,39 @@ function drawMainScreen() {
   // Reset shadow for other elements
   drawingContext.shadowBlur = 0;
 
+  // Hide all iframes and instructions when on main screen
   if (window.gameIframe) {
     window.gameIframe.style.display = 'none';
   }
-
   if (window.p5Iframe) {
     window.p5Iframe.style.display = 'none';
   }
   if (window.textGenIframe) {
     window.textGenIframe.style.display = 'none';
+  }
+  if (window.p5Instructions) {
+    window.p5Instructions.style.display = 'none';
   }
 }
 
 function drawFeature1() {
-
+  // Hide other iframes and elements
   if (window.p5Iframe) {
     window.p5Iframe.style.display = 'none';
   }
   if (window.textGenIframe) {
     window.textGenIframe.style.display = 'none';
+  }
+  if (window.p5Instructions) {
+    window.p5Instructions.style.display = 'none';
   }
 
   // Sci-fi text with glow
   drawingContext.shadowBlur = 12;
   drawingContext.shadowColor = "rgba(0, 200, 255, 0.6)";
 
-
-   // Only show title and iframe if we haven't created the iframe yet
-   if (!window.gameIframe) {
+  // Only show title and iframe if we haven't created the iframe yet
+  if (!window.gameIframe) {
     // Create and position the iframe
     window.gameIframe = document.createElement('iframe');
     window.gameIframe.src = 'First Project.materials/Release/source.html';
@@ -296,13 +301,15 @@ function drawFeature1() {
   }
        
   drawingContext.shadowBlur = 0;
-  
- 
 }
 
 function drawFeature2() {
+  // Hide other iframes
   if (window.gameIframe) {
     window.gameIframe.style.display = 'none';
+  }
+  if (window.textGenIframe) {
+    window.textGenIframe.style.display = 'none';
   }
 
   // Create and show Feature2 iframe if it doesn't exist yet
@@ -370,21 +377,18 @@ function drawFeature2() {
   if (window.p5Instructions) {
     window.p5Instructions.style.display = 'block';
   }
-  
-  if (window.textGenIframe) {
-    window.textGenIframe.style.display = 'none';
-  }
 }
 
- 
-
 function drawFeature3() {
+  // Hide other iframes and elements
   if (window.gameIframe) {
     window.gameIframe.style.display = 'none';
   }
-
   if (window.p5Iframe) {
     window.p5Iframe.style.display = 'none';
+  }
+  if (window.p5Instructions) {
+    window.p5Instructions.style.display = 'none';
   }
 
   // Only create iframe if it doesn't exist yet
@@ -411,6 +415,20 @@ function drawFeature3() {
 }
 
 function drawCredits() {
+  // Hide all iframes and instructions when on credits screen
+  if (window.gameIframe) {
+    window.gameIframe.style.display = 'none';
+  }
+  if (window.p5Iframe) {
+    window.p5Iframe.style.display = 'none';
+  }
+  if (window.textGenIframe) {
+    window.textGenIframe.style.display = 'none';
+  }
+  if (window.p5Instructions) {
+    window.p5Instructions.style.display = 'none';
+  }
+
   // Sci-fi text with glow
   drawingContext.shadowBlur = 12;
   drawingContext.shadowColor = "rgba(0, 200, 255, 0.6)";
@@ -451,18 +469,6 @@ function drawCredits() {
   text("bookshelf of Project Gutenberg using python code written by ChatGPT 4.0.", width / 2, startY + lineHeight * 8);
 
   drawingContext.shadowBlur = 0;
-
-  if (window.gameIframe) {
-    window.gameIframe.style.display = 'none';
-  }
-
-  if (window.p5Iframe) {
-    window.p5Iframe.style.display = 'none';
-  }
-
-  if (window.textGenIframe) {
-    window.textGenIframe.style.display = 'none';
-  }
 }
 
 // ------------- Particle Class for Falling Emojis -------------
