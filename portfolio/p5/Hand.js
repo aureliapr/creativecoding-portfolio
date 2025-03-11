@@ -412,3 +412,93 @@ function updatePlanePosition() {
     }
   }
 }
+
+
+// Function to handle camera access
+function setupCamera() {
+  // Create a video element for the camera
+  const video = document.createElement('video');
+  video.id = 'camera';
+  video.autoplay = true;
+  video.playsinline = true; // Important for iOS
+  video.style.display = 'none'; // Hide the video element
+  document.body.appendChild(video);
+  
+  // Request camera access with proper error handling
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: 'user', // Use front camera on mobile devices
+        width: { ideal: 640 },
+        height: { ideal: 480 }
+      },
+      audio: false
+    })
+    .then(function(stream) {
+      // Camera access granted
+      video.srcObject = stream;
+      console.log("Camera access granted");
+      
+      // If you're using ml5.handpose, initialize it after camera is ready
+      video.onloadeddata = function() {
+        if (window.initHandpose) {
+          window.initHandpose(video);
+        }
+      };
+    })
+    .catch(function(error) {
+      console.error("Camera access error:", error);
+      // Show a helpful error message to the user
+      const errorDiv = document.createElement('div');
+      errorDiv.style.color = 'white';
+      errorDiv.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+      errorDiv.style.padding = '20px';
+      errorDiv.style.position = 'absolute';
+      errorDiv.style.top = '50%';
+      errorDiv.style.left = '50%';
+      errorDiv.style.transform = 'translate(-50%, -50%)';
+      errorDiv.style.borderRadius = '10px';
+      errorDiv.style.fontFamily = 'Arial, sans-serif';
+      errorDiv.style.zIndex = '1000';
+      
+      if (error.name === 'NotAllowedError') {
+        errorDiv.innerHTML = '<h3>Camera Access Denied</h3>' +
+          '<p>Please allow camera access to use the hand gesture features.</p>' +
+          '<p>You may need to reset permissions in your browser settings.</p>';
+      } else if (error.name === 'NotFoundError') {
+        errorDiv.innerHTML = '<h3>Camera Not Found</h3>' +
+          '<p>This application requires a camera to detect hand gestures.</p>';
+      } else {
+        errorDiv.innerHTML = '<h3>Camera Error</h3>' +
+          '<p>There was a problem accessing your camera.</p>' +
+          '<p>Error: ' + error.message + '</p>';
+      }
+      
+      document.body.appendChild(errorDiv);
+    });
+  } else {
+    console.error("getUserMedia not supported in this browser");
+    alert("Your browser doesn't support camera access needed for this feature.");
+  }
+  
+  return video;
+}
+
+// Add function to initialize handpose after camera is ready
+function initHandpose(video) {
+  // This function should be implemented in your P5 sketch 
+  // to initialize ml5.handpose with the video element
+  console.log("Initializing handpose with video element");
+  
+  // Example implementation (modify according to your existing code):
+  // handpose = ml5.handpose(video, modelReady);
+}
+
+// Make functions available globally
+window.setupCamera = setupCamera;
+window.initHandpose = initHandpose;
+
+// Call setupCamera when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  setupCamera();
+});
