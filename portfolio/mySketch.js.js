@@ -301,49 +301,82 @@ function drawFeature1() {
 }
 
 function drawFeature2() {
-
   if (window.gameIframe) {
     window.gameIframe.style.display = 'none';
   }
 
-  // Sci-fi text with glow
-  drawingContext.shadowBlur = 12;
-  drawingContext.shadowColor = "rgba(0, 200, 255, 0.6)";
-  
- // Create and show Feature2 iframe if it doesn't exist yet
- if (!window.p5Iframe) {
-  // Create the iframe
-  window.p5Iframe = document.createElement('iframe');
-  window.p5Iframe.src = 'P5/index.html';
-  
-  // Position in center of screen with fixed width/height
-  const iframeWidth = '640px';
-  const iframeHeight = '480px';
-  window.p5Iframe.style.position = 'absolute';
-  window.p5Iframe.style.width = iframeWidth;
-  window.p5Iframe.style.height = iframeHeight;
-  window.p5Iframe.style.left = '50%';
-  window.p5Iframe.style.top = '50%';
-  window.p5Iframe.style.transform = 'translate(-50%, -50%)';
-  window.p5Iframe.style.marginTop = '30px'; // Adjust for nav bar
-  
-  // Add glowing border that matches portfolio text
-  window.p5Iframe.style.border = '4px solid rgba(0, 200, 255, 0.8)';
-  window.p5Iframe.style.borderRadius = '10px'; // Rounded corners
-  window.p5Iframe.style.boxShadow = '0 0 15px rgba(0, 200, 255, 0.7), 0 0 30px rgba(0, 160, 220, 0.4)';
-  
-  document.body.appendChild(window.p5Iframe);
-}
-
+  // Create and show Feature2 iframe if it doesn't exist yet
+  if (!window.p5Iframe) {
+    // Create the iframe
+    window.p5Iframe = document.createElement('iframe');
+    window.p5Iframe.src = 'P5/index.html';
+    
+    // Position in center of screen with fixed width/height
+    const iframeWidth = '640px';
+    const iframeHeight = '480px';
+    window.p5Iframe.style.position = 'absolute';
+    window.p5Iframe.style.width = iframeWidth;
+    window.p5Iframe.style.height = iframeHeight;
+    window.p5Iframe.style.left = '50%';
+    window.p5Iframe.style.top = '45%'; // Move up slightly to make room for text
+    window.p5Iframe.style.transform = 'translate(-50%, -50%)';
+    window.p5Iframe.style.marginTop = '0px'; // Adjust to ensure there's space below
+    
+    // Add glowing border that matches portfolio text
+    window.p5Iframe.style.border = '4px solid rgba(0, 200, 255, 0.8)';
+    window.p5Iframe.style.borderRadius = '10px'; // Rounded corners
+    window.p5Iframe.style.boxShadow = '0 0 15px rgba(0, 200, 255, 0.7), 0 0 30px rgba(0, 160, 220, 0.4)';
+    
+    document.body.appendChild(window.p5Iframe);
+    
+    // Create instruction text as HTML element below the iframe
+    window.p5Instructions = document.createElement('div');
+    window.p5Instructions.innerHTML = `
+      <div style="
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-family: 'Source Code Pro', monospace;
+        color: rgb(210, 240, 255);
+        width: 640px;
+        top: calc(45% + ${parseInt(iframeHeight)/2}px + 20px);
+        text-shadow: 0 0 10px rgba(0, 200, 255, 0.6), 0 0 20px rgba(0, 200, 255, 0.4);
+      ">
+        <p style="
+          font-size: 22px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        ">HAND GESTURE CONTROLS</p>
+        <p style="
+          font-size: 16px;
+          margin-bottom: 8px;
+          color: rgb(180, 220, 255);
+        ">TRY DIFFERENT GESTURES: HEART SHAPE, FLAT HAND, VICTORY SIGN</p>
+        <p style="
+          font-size: 16px;
+          color: rgb(180, 220, 255);
+        ">MOVE YOUR HAND AROUND TO INTERACT WITH THE ML5 HANDPOSE MODEL</p>
+      </div>
+    `;
+    document.body.appendChild(window.p5Instructions);
+  }
   
   // Make sure Feature2 iframe is visible
   if (window.p5Iframe) {
     window.p5Iframe.style.display = 'block';
   }
+  // Make sure instructions are visible
+  if (window.p5Instructions) {
+    window.p5Instructions.style.display = 'block';
+  }
+  
   if (window.textGenIframe) {
     window.textGenIframe.style.display = 'none';
   }
 }
+
+ 
 
 function drawFeature3() {
   if (window.gameIframe) {
