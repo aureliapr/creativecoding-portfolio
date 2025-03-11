@@ -309,7 +309,7 @@ function drawFeature2() {
   if (!window.p5Iframe) {
     // Create the iframe
     window.p5Iframe = document.createElement('iframe');
-    window.p5Iframe.src = 'P5/index.html';
+    window.p5Iframe.src = 'p5/index.html';
     
     // Position in center of screen with fixed width/height
     const iframeWidth = '640px';
