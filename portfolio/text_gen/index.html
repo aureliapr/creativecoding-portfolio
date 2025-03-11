@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fate by Sherlock Holmes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English&display=swap');
+
+        body {
+            font-family: 'IM Fell English', serif;
+            background-color: #2c2c2c;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23393939' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 2em;
+            background: #3a3a3a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 1px solid #1a1a1a;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #d4d4d4;
+            text-align: center;
+            font-size: 2.5em;
+        }
+
+        #image-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2em auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        #image-container:hover {
+            opacity: 1;
+        }
+
+        #output {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #e0e0e0;
+            padding: 2em;
+            margin: 1em 0;
+            background: #2a2a2a;
+            border: 1px solid #1a1a1a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            color: #808080;
+            font-size: 0.9em;
+            margin-top: 2em;
+            border-top: 1px solid #1a1a1a;
+            width: 100%;
+            background: #2a2a2a;
+        }
+
+        footer p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fate by Sherlock Holmes</h1>
+        <div id="image-container" class="fade-in"></div>
+        <div id="output">Loading observations from Dr. Watson's journal...</div>
+    </div>
+
+    <footer>
+        <p>Generated text inspired by Arthur Conan Doyle's works. Source: Project Gutenberg.</p>
+    </footer>
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="tracery.min.js"></script>
+    <script>
+        let grammar = null;
+
+        fetch('grammar.json')
+            .then(response => response.json())
+            .then(data => {
+                grammar = tracery.createGrammar(data);
+                startAutoGenerate();
+            })
+            .catch(error => {
+                document.getElementById('output').innerHTML = 'Error in Dr. Watson\'s notes: ' + error.message;
+                console.error('Error:', error);
+            });
+
+            function generateNew() {
+            if (grammar) {
+                // Generate and update text
+                const outputDiv = document.getElementById('output');
+                outputDiv.classList.remove('fade-in');
+                void outputDiv.offsetWidth; // Trigger reflow
+                outputDiv.classList.add('fade-in');
+                const output = grammar.flatten('#origin#');
+                outputDiv.innerHTML = output.replace(/\n/g, '<br>');
+
+                // Generate and update SVG
+                const imageContainer = document.getElementById('image-container');
+                imageContainer.classList.remove('fade-in');
+                void imageContainer.offsetWidth; // Trigger reflow
+                imageContainer.classList.add('fade-in');
+                const svgOutput = grammar.flatten('#image#');
+                // Extract only the SVG content
+                const svgMatch = svgOutput.match(/<svg[\s\S]*?<\/svg>/);
+                if (svgMatch) {
+                    imageContainer.innerHTML = svgMatch[0];
+                }
+            }
+        }
+
+        function startAutoGenerate() {
+            generateNew();
+            setInterval(generateNew, 2000);
+        }
+    </script>
+</body>
+</html>

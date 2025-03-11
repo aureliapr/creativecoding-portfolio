@@ -1,0 +1,115 @@
+header { text-align: center; }
+header .image { margin: 5em; }
+header .image img { border-radius: 0.5em; }
+
+nav { text-align: center; }
+nav ul li {
+  list-style: none;
+  display: inline;
+  margin: 0 1.5em;
+}
+nav ul li span { display: none; }
+nav .download span { display: none; }
+
+/* Stranger Things inspired theme */
+body {
+  background-color: #000000;
+  color: #ff0000;
+  font-family: 'Crimson Text', serif;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ff0000;
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+a {
+  color: #ff0000;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #8b0000;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+.sourceintroduction {
+  border-bottom: 2px solid #ff0000;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+}
+
+.sourcebibliography {
+  color: #ff4444;
+  font-style: italic;
+}
+
+.source {
+  line-height: 1.6;
+  background-color: rgba(20, 20, 20, 0.8);
+  padding: 2em;
+  border: 1px solid #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.links {
+  margin: 2em 0;
+}
+
+.links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.links ul li {
+  display: inline-block;
+  margin: 0 1em;
+}
+
+.quote {
+  color: #ff6666;
+}
+
+.heading {
+  color: #ff3333;
+  font-weight: bold;
+}
+
+.sourcecoverimage img {
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+/* Indent styling */
+.indent0 { margin-left: 0em; }
+.indent1 { margin-left: 2em; }
+.indent2 { margin-left: 4em; }
+.indent3 { margin-left: 6em; }
+
+/* Special effects for Stranger Things vibe */
+::selection {
+  background-color: #ff0000;
+  color: #000000;
+}
+
+/* Add a subtle flickering effect to the text */
+@keyframes textFlicker {
+  0% { opacity: 0.95; }
+  50% { opacity: 1; }
+  100% { opacity: 0.95; }
+}
+
+.source {
+  animation: textFlicker 2s infinite;
+}
